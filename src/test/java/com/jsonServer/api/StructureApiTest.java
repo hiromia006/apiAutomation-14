@@ -63,7 +63,6 @@ public class StructureApiTest extends BaseStructureApiTest{
         String title_name= LoremIpsum.getInstance().getTitle(3);
 
         given()
-                .contentType("application/json")
                 .spec(getHeaderSpecification())
                 .body( getPostObj(title_name,210))
                 .log().uri()

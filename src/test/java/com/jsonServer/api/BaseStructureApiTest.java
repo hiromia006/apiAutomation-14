@@ -41,11 +41,11 @@ public class BaseStructureApiTest {
     }
 
     public RequestSpecification getHeaderSpecification(){
-        return  new RequestSpecBuilder()
+        RequestSpecBuilder  builder= new RequestSpecBuilder()
                 .setContentType("application/json")
                 .setBaseUri(BASE_URL)
-                .setPort(PORT)
-                .build();
+                .setPort(PORT);
+        return builder.build();
     }
 
 }
