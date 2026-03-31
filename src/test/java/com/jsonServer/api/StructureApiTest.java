@@ -14,9 +14,7 @@ public class StructureApiTest extends BaseStructureApiTest{
     @Test
     public void getPostsListShouldSucceed() {
         given()
-                .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
+                .spec(getHeaderSpecification())
                 .log().uri()
                 .when()
                 .get("/posts")
@@ -31,9 +29,7 @@ public class StructureApiTest extends BaseStructureApiTest{
         System.out.println( "postId = " + postId);
 
         given()
-                .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
+                .spec(getHeaderSpecification())
                 .log().uri()
                 .when()
                 .get("/posts/"+postId)
@@ -46,16 +42,9 @@ public class StructureApiTest extends BaseStructureApiTest{
     @Test
     public void createPostShouldSucceed() {
         String title_name= LoremIpsum.getInstance().getTitle(3);
-
-        Map<String, Object> sharifBody = new HashMap<>();
-        sharifBody.put("title", title_name);
-        sharifBody.put("views", 110);
-
         given()
-                .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
-                .body(sharifBody)
+                .spec(getHeaderSpecification())
+                .body(getPostObj(title_name,110))
                 .log().uri()
                 .log().body()
                 .when()
@@ -72,15 +61,11 @@ public class StructureApiTest extends BaseStructureApiTest{
         String postId = getPostId();
 
         String title_name= LoremIpsum.getInstance().getTitle(3);
-        Map<String, Object> sharifBody = new HashMap<>();
-        sharifBody.put("title", title_name);
-        sharifBody.put("views", 210);
 
         given()
                 .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
-                .body(sharifBody)
+                .spec(getHeaderSpecification())
+                .body( getPostObj(title_name,210))
                 .log().uri()
                 .log().body()
                 .when()
@@ -98,15 +83,9 @@ public class StructureApiTest extends BaseStructureApiTest{
         String postId = getPostId();
 
         String title_name= LoremIpsum.getInstance().getTitle(3);
-        Map<String, Object> sharifBody = new HashMap<>();
-        sharifBody.put("title", title_name);
-
-
         given()
-                .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
-                .body(sharifBody)
+                .spec(getHeaderSpecification())
+                .body(getPostObj(title_name))
                 .log().uri()
                 .log().body()
                 .when()
@@ -123,9 +102,7 @@ public class StructureApiTest extends BaseStructureApiTest{
         String postId = getPostId();
 
         given()
-                .contentType("application/json")
-                .baseUri(BASE_URL)
-                .port(PORT)
+                .spec(getHeaderSpecification())
                 .log().uri()
                 .when()
                 .delete("/posts/"+postId)
