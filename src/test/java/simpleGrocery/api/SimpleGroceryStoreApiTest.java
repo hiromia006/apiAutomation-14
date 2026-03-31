@@ -134,14 +134,7 @@ public class SimpleGroceryStoreApiTest extends BaseSimpleGroceryStoreApiTest {
 
     @Test(priority = 2)
     public void getOrderDetailShouldSucceed() {
-        String orderId = given()
-                .spec(getHeaderSpecification())
-                .header("Authorization", "Bearer " + bearer_token)
-                .log().uri()
-                .when()
-                .get("/orders")
-                .then()
-                .extract().jsonPath().getString("[0].id");
+        String orderId = orderId();
 
         given()
                 .spec(getHeaderSpecification())
@@ -157,14 +150,7 @@ public class SimpleGroceryStoreApiTest extends BaseSimpleGroceryStoreApiTest {
 
     @Test(priority = 3)
     public void deleteOrderShouldSucceed() {
-        String orderId = given()
-                .spec(getHeaderSpecification())
-                .header("Authorization", "Bearer " + bearer_token)
-                .log().uri()
-                .when()
-                .get("/orders")
-                .then()
-                .extract().jsonPath().getString("[0].id");
+        String orderId = orderId();
 
         given()
                 .spec(getHeaderSpecification())

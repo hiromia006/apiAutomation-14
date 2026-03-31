@@ -39,4 +39,15 @@ public class BaseSimpleGroceryStoreApiTest {
                 .extract().jsonPath().getString("accessToken");
     }
 
+    public String orderId(){
+        return given()
+                .spec(getHeaderSpecification())
+                .header("Authorization", "Bearer " + bearer_token)
+                .log().uri()
+                .when()
+                .get("/orders")
+                .then()
+                .extract().jsonPath().getString("[0].id");
+    }
+
 }
