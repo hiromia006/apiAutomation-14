@@ -3,13 +3,10 @@ package com.jsonServer.api;
 import com.thedeanda.lorem.LoremIpsum;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class StructureApiTest extends BaseStructureApiTest{
+public class StructureApiTest extends BaseStructureApiTest {
 
     @Test
     public void getPostsListShouldSucceed() {
@@ -26,13 +23,13 @@ public class StructureApiTest extends BaseStructureApiTest{
     @Test
     public void getPostDetailShouldSucceed() {
         String postId = getPostId();
-        System.out.println( "postId = " + postId);
+        System.out.println("postId = " + postId);
 
         given()
                 .spec(getHeaderSpecification())
                 .log().uri()
                 .when()
-                .get("/posts/"+postId)
+                .get("/posts/" + postId)
                 .then()
                 .log().body()
                 .statusCode(200)
@@ -41,10 +38,9 @@ public class StructureApiTest extends BaseStructureApiTest{
 
     @Test
     public void createPostShouldSucceed() {
-        String title_name= LoremIpsum.getInstance().getTitle(3);
+        String title_name = LoremIpsum.getInstance().getTitle(3);
         given()
-                .spec(getHeaderSpecification())
-                .body(getPostObj(title_name,110))
+                .spec(getHeadWithJsonPlayLoad(title_name, 110))
                 .log().uri()
                 .log().body()
                 .when()
@@ -60,15 +56,13 @@ public class StructureApiTest extends BaseStructureApiTest{
     public void putPostShouldSucceed() {
         String postId = getPostId();
 
-        String title_name= LoremIpsum.getInstance().getTitle(3);
-
+        String title_name = LoremIpsum.getInstance().getTitle(3);
         given()
-                .spec(getHeaderSpecification())
-                .body( getPostObj(title_name,210))
+                .spec(getHeadWithJsonPlayLoad(title_name, 210))
                 .log().uri()
                 .log().body()
                 .when()
-                .put("/posts/"+postId)
+                .put("/posts/" + postId)
                 .then()
                 .log().body()
                 .statusCode(200)
@@ -81,14 +75,14 @@ public class StructureApiTest extends BaseStructureApiTest{
     public void patchPostShouldSucceed() {
         String postId = getPostId();
 
-        String title_name= LoremIpsum.getInstance().getTitle(3);
+        String title_name = LoremIpsum.getInstance().getTitle(3);
         given()
                 .spec(getHeaderSpecification())
                 .body(getPostObj(title_name))
                 .log().uri()
                 .log().body()
                 .when()
-                .patch("/posts/"+postId)
+                .patch("/posts/" + postId)
                 .then()
                 .log().body()
                 .statusCode(200)
@@ -99,12 +93,11 @@ public class StructureApiTest extends BaseStructureApiTest{
     @Test
     public void deletePostShouldSucceed() {
         String postId = getPostId();
-
         given()
                 .spec(getHeaderSpecification())
                 .log().uri()
                 .when()
-                .delete("/posts/"+postId)
+                .delete("/posts/" + postId)
                 .then()
                 .log().body()
                 .statusCode(200);

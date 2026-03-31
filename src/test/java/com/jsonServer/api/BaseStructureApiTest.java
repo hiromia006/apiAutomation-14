@@ -40,12 +40,19 @@ public class BaseStructureApiTest {
         return sharifBody;
     }
 
-    public RequestSpecification getHeaderSpecification(){
-        RequestSpecBuilder  builder= new RequestSpecBuilder()
+    public RequestSpecification getHeaderSpecification() {
+        RequestSpecBuilder builder = new RequestSpecBuilder()
                 .setContentType("application/json")
                 .setBaseUri(BASE_URL)
                 .setPort(PORT);
         return builder.build();
+    }
+
+    public RequestSpecification getHeadWithJsonPlayLoad(String tittle, int viewNumber) {
+        return new RequestSpecBuilder()
+                .addRequestSpecification(getHeaderSpecification())
+                .setBody(getPostObj(tittle, viewNumber))
+                .build();
     }
 
 }
