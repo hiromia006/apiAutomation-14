@@ -7,7 +7,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class StructureApiTest extends BaseStructureApiTest {
-
     @Test
     public void getPostsListShouldSucceed() {
         given()
