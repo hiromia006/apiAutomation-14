@@ -22,9 +22,7 @@ dependencies {
 }
 
 def isWindows = System.getProperty("os.name").toLowerCase().contains("win")
-println "isWindows: $isWindows"
 def allureResultsDir = layout.buildDirectory.dir("allure-results").get().asFile
-println "allureResultsDir: $allureResultsDir"
 def allureReportDir = layout.buildDirectory.dir("allure-report").get().asFile
 println "allureReportDir: $allureReportDir"
 
@@ -32,11 +30,11 @@ tasks.register('generateSingleAllureHtml', Exec) {
     group = "reporting"
     description = "Generates single-file Allure HTML report"
 
-    dependsOn test
-
-    doFirst {
-        delete allureReportDir
-    }
+//    dependsOn test
+//
+//    doFirst {
+//        delete allureReportDir
+//    }
 
     if (isWindows) {
         commandLine "cmd", "/c",
@@ -60,7 +58,7 @@ tasks.register('generateSingleAllureHtml', Exec) {
     doLast {
         def report = new File(allureReportDir, "index.html")
         if (report.exists()) {
-            report.renameTo(new File(allureReportDir, "ErpTestAutomationReport.html"))
+            report.renameTo(new File(allureReportDir, "ErpTestApiAutomationReport.html"))
         }
     }
 }
